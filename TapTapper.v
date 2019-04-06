@@ -16,14 +16,7 @@ module TapTapper
 		output [6:0] HEX0, HEX1, HEX2, HEX3, HEX7, HEX6,// User score counter
 		output [17:0] LEDR // TEST
 	);
-	
-	// TEST
-	assign LEDR[17] = refresh;
-	assign LEDR[15] = plot;
-	assign LEDR[14] = clear;
-	assign LEDR[12] = refresh;
-	assign LEDR[11] = CLOCK_50;
-	
+		
 	wire master_clock;
 	
 	Twoto1mux master
@@ -580,57 +573,6 @@ module TapTapper
 endmodule
 
 
-//
-//// rate divider 50 Mhz to ~60 Hz
-//module multi_column_animator
-//	(
-//		input clk,
-//		input resetn,
-//
-//		input [7:0] x_in_0,
-//		input [6:0] y_in_0,
-//		input [2:0] colour_in_0,
-//
-//		output reg [7:0] x_out,
-//		output reg [6:0] y_out,
-//		output reg [2:0] colour_out
-//
-//	);
-//	
-//	reg [2:0] q; // reg for curr val
-//		
-//	always @ (posedge clk, negedge resetn)
-//	begin
-//		if (~resetn) begin
-//			x_out <= x_in_0;
-//			y_out <= y_in_0;
-//			colour_out <= colour_in_0;
-//			q <= 3'd3;
-//		end
-//		else if (q == 3'd3) begin // reset
-//			x_out <= x_in_0;
-//			y_out <= y_in_0;
-//			colour_out <= colour_in_0;
-//			q <= 3'd2;
-//		end
-//		else if (q == 3'd2) begin // reset
-//			x_out <= x_in_0;
-//			y_out <= y_in_0;
-//			colour_out <= colour_in_0;
-//			q <= 3'd1;
-//		end
-//		else if (q == 3'd1) begin // reset
-//			x_out <= x_in_0;
-//			y_out <= y_in_0;
-//			colour_out <= colour_in_0;
-//			q <= 3'd3;
-//		end
-//
-//	end
-//
-//endmodule
-
-
 module clearScreen(input clk,
 						input clearEn,
 						output reg clear_status,						// clear_status allows user of function to know that the function is finished
@@ -1131,7 +1073,7 @@ module refresh_rate_counter
 
 endmodule
 
-// rate divider 50 Mhz to ~60 Hz
+// counts for 15 fps given a 60Hz counter
 module frames_counter
 	(
 		input clk,
